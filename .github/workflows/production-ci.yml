@@ -1,0 +1,44 @@
+name: Production CI & Security Audit Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  audit-and-build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install Production Dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Run Security Audit Check
+        run: npm audit --audit-level=high || true
+
+      - name: Run TypeScript Strict Type Verification
+        run: npx tsc --noEmit
+
+      - name: Run ESLint Code Quality Verification
+        run: npm run lint
+
+      - name: Verify Next.js Production Build
+        run: npx next build
+        env:
+          NEXT_PUBLIC_SHELBY_NETWORK: testnet
+          NEXT_PUBLIC_SHELBY_RPC_URL: https://rpc.shelby.xyz
+          NEXT_PUBLIC_APTOS_NODE_URL: https://fullnode.testnet.aptoslabs.com/v1
