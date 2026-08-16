@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 4%;
+    --foreground: 0 0% 98%;
+    --border: 220 15% 16%;
+    --swiss-blue: 223 100% 50%;
+    --swiss-red: 356 100% 59%;
+    --swiss-teal: 177 100% 39%;
+  }
+
+  body {
+    background-color: #090A0F;
+    color: #F3F4F6;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* Swiss Grid Blueprint Background */
+.swiss-grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Swiss Card Border & High Signal Glow */
+.swiss-card {
+  background: rgba(18, 20, 28, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.swiss-card:hover {
+  border-color: rgba(0, 71, 255, 0.4);
+}
+
+.swiss-border-red {
+  border-left: 3px solid #FF3B30;
+}
+
+.swiss-border-blue {
+  border-left: 3px solid #0047FF;
+}
+
+.swiss-border-teal {
+  border-left: 3px solid #00C7BE;
+}
+
+/* DICOM Canvas Scanning Grid */
+.dicom-grid {
+  background-image: 
+    linear-gradient(to right, rgba(0, 199, 190, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 199, 190, 0.07) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #090A0F;
+}
+::-webkit-scrollbar-thumb {
+  background: #1F2333;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0047FF;
+}
